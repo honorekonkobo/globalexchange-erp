@@ -1,0 +1,48 @@
+Date;Phase;Tache;Description;Statut
+2026-09-14;Priorite 1 - Authentification;Ecran de connexion caissier;Overlay plein ecran bloquant, selection guichetier + PIN 4 chiffres, toast erreur et animation shake sur PIN incorrect;Termine
+2026-09-14;Priorite 2 - Module KYC;Formulaire d'enregistrement client;Nom, type de piece, numero, telephone, nationalite, date de naissance, photo (apercu base64);Termine
+2026-09-14;Priorite 2 - Module KYC;Tableau base clients;Colonnes ID, nom, piece, telephone, nationalite, nb transactions, statut, actions, recherche temps reel;Termine
+2026-09-14;Priorite 2 - Module KYC;Vue detail client;Fiche complete + historique des transactions du client;Termine
+2026-09-14;Priorite 3 - Rapport journalier;Nouvel onglet Rapport;Tableau recapitulatif des operations par service (Change, OM, WU, WAVE, MOOV, MG);Termine
+2026-09-14;Priorite 3 - Rapport journalier;Solde de caisse estime;Ouverture manuelle + entrees - sorties + commissions, recalcul en direct;Termine
+2026-09-14;Priorite 3 - Rapport journalier;Graphique commissions par operateur;Barres CSS pures, sans bibliotheque externe;Termine
+2026-09-14;Priorite 3 - Rapport journalier;Impression du rapport;Styles print dedies, masque la sidebar;Termine
+2026-09-14;Priorite 4 - Caisse & Tresorerie;Solde de caisse en temps reel;Calcul dynamique depuis les transactions et mouvements;Termine
+2026-09-14;Priorite 4 - Caisse & Tresorerie;Journal des mouvements;Heure, type, reference, entree, sortie, solde courant;Termine
+2026-09-14;Priorite 4 - Caisse & Tresorerie;Alimentation / retrait de caisse;Formulaire montant + motif;Termine
+2026-09-14;Priorite 4 - Caisse & Tresorerie;Alerte de seuil bas;Banniere rouge automatique sous le seuil minimal configure;Termine
+2026-09-14;Priorite 4 - Caisse & Tresorerie;Cloture de journee;Confirmation + resume avant cloture;Termine
+2026-09-14;Priorite 5 - Polish & Robustesse;Horloge temps reel;Affichage HH:MM:SS dans l'en-tete;Termine
+2026-09-14;Priorite 5 - Polish & Robustesse;Compteur de transactions du jour;Badge dans l'en-tete;Termine
+2026-09-14;Priorite 5 - Polish & Robustesse;Gestion CDN hors-ligne;Banniere d'erreur claire si Tailwind/Lucide indisponibles;Termine
+2026-09-14;Priorite 5 - Polish & Robustesse;Avertissement modifications non enregistrees;Confirmation avant de quitter un formulaire non soumis;Termine
+2026-09-14;Priorite 5 - Polish & Robustesse;Animation de chargement;Spinner au demarrage (minimum 50ms);Termine
+2026-09-14;Priorite 5 - Polish & Robustesse;Raccourcis clavier;Alt+D/E/T pour naviguer entre les onglets principaux;Termine
+2026-09-14;Revue de code;Faille XSS (frontend);Injection HTML via nom client, MTCN et motif de caisse trouvee et corrigee (echappement centralise);Termine
+2026-09-14;Revue de code;Corrections diverses;Taux officiel errone, echecs localStorage silencieux, collision de noms KYC, garde manquante, ID KYC fragile;Termine
+2026-09-15;Identite visuelle;Logo S.A.C integre;Detourage du fond blanc, integration sur ecran de connexion, sidebar et recu imprime;Termine
+2026-09-15;Identite visuelle;Rebranding Burkina Faso;Ouagadougou, indicatif +226, noms des guichetiers, corridors de transfert, banque locale;Termine
+2026-09-15;Donnees;Nettoyage de la base de demonstration;Suppression des transactions et clients fictifs, base vide par defaut;Termine
+2026-09-15;Documentation;Manuel utilisateur PDF (v1);Guide complet 13 pages, genere et livre;Termine
+2026-09-16;Securite frontend;Verrou anti-bruteforce PIN;5 tentatives puis blocage 30 secondes;Termine
+2026-09-16;Securite frontend;Integrite des scripts CDN (SRI);Hash de securite sur Lucide Icons (impossible sur Tailwind CDN, CORS non supporte);Termine
+2026-09-16;Performance;Compression des photos KYC;Redimensionnement + compression avant stockage (environ -93%);Termine
+2026-09-16;Accessibilite;Association labels/champs;29 associations label/for ajoutees sur tous les formulaires;Termine
+2026-09-16;Audit;Audit complet de l'application;Revue securite, architecture, fonctionnel, accessibilite, performance;Termine
+2026-09-17;Fonctionnalite;Taux de change du jour;Modale de fixation des taux, tendance calculee automatiquement;Termine
+2026-09-17;Fonctionnalite;Gestion dynamique des devises;Ajout/suppression de devises depuis l'interface (Dirham marocain ajoute), EUR protege;Termine
+2026-09-22;Backend - Infrastructure;Installation PostgreSQL;Base de donnees sac_erp, utilisateur applicatif dedie, mots de passe securises;Termine
+2026-09-22;Backend - Infrastructure;Serveur Node.js/Express;API + fichiers statiques sur un seul process (port 3000);Termine
+2026-09-22;Backend - Infrastructure;Migrations et donnees initiales;7 tables creees, guichetiers/taux/config initialises;Termine
+2026-09-22;Backend - Securite;Authentification JWT reelle;PIN individuel par guichetier (bcrypt), verrou anti-bruteforce cote serveur;Termine
+2026-09-22;Backend - API;API CRUD complete;Transactions, clients KYC, mouvements de caisse, taux, configuration;Termine
+2026-09-22;Backend - Migration frontend;Module transactions vers l'API;Cache local synchronise, partage multi-guichets verifie;Termine
+2026-09-22;Backend - Migration frontend;Module KYC vers l'API;Liaison transaction/client KYC corrigee (reference texte au lieu d'ID interne);Termine
+2026-09-22;Backend - Migration frontend;Module Caisse vers l'API;Heure et reference des mouvements attribuees par le serveur;Termine
+2026-09-22;Backend - Migration frontend;Module Taux vers l'API;Validation et calcul de tendance centralises cote serveur;Termine
+2026-09-22;Backend - Validation;Test multi-guichets complet;Deux sessions simultanees, partage verifie sur les 4 modules;Termine
+2026-09-22;Documentation;Manuel utilisateur PDF (v2);Mise a jour de la section stockage des donnees pour l'architecture serveur;Termine
+2026-09-22;Backend - Securite;Revue de securite backend;Faille critique trouvee (crash serveur sur requete malformee) et corrigee;Termine
+2026-09-22;Backend - Securite;Durcissements complementaires;CORS retire, algorithme JWT fixe, fuite de message d'erreur corrigee;Termine
+2026-09-23;Backend - Configuration;Config partagee branchee sur l'API;Seuils de caisse et frais charges depuis le serveur a la connexion;Termine
+2026-09-23;En attente;Enregistrement du service Windows PostgreSQL;Necessite des droits administrateur, instructions transmises a l'utilisateur;En attente

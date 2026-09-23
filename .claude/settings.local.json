@@ -1,0 +1,42 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(winget install --id PostgreSQL.PostgreSQL.16 --silent --accept-package-agreements --accept-source-agreements 2>&1)",
+      "PowerShell(Get-ItemProperty \"HKLM:\\\\SYSTEM\\\\CurrentControlSet\\\\Services\\\\postgresql-x64-16\" | Select-Object ImagePath, Start, ObjectName; echo \"---try Get-Service exact---\"; try { Get-Service -Name \"postgresql-x64-16\" -ErrorAction Stop } catch { Write-Output \"ERROR: $_\" })",
+      "PowerShell($env:Path += \";C:\\\\Program Files\\\\PostgreSQL\\\\16\\\\bin\"; pg_ctl status -D \"C:\\\\Program Files\\\\PostgreSQL\\\\16\\\\data\" 2>&1)",
+      "PowerShell($env:Path += \";C:\\\\Program Files\\\\PostgreSQL\\\\16\\\\bin\"; pg_ctl start -D \"C:\\\\Program Files\\\\PostgreSQL\\\\16\\\\data\" -l \"C:\\\\Program Files\\\\PostgreSQL\\\\16\\\\data\\\\pg_startup.log\" -w 2>&1)",
+      "PowerShell(Get-Process postgres -ErrorAction SilentlyContinue)",
+      "PowerShell($env:Path += \";C:\\\\Program Files\\\\PostgreSQL\\\\16\\\\bin\"; $env:PGPASSWORD = \"\"; psql -U postgres -h localhost -p 5432 -c \"SELECT version\\(\\);\" 2>&1)",
+      "Bash(\"/c/Program Files/PostgreSQL/16/bin/psql.exe\" -U postgres -h localhost -p 5432 -c \"SELECT version\\(\\);\")",
+      "PowerShell($env:Path += \";C:\\\\Program Files\\\\PostgreSQL\\\\16\\\\bin\"; pg_ctl reload -D \"C:\\\\Program Files\\\\PostgreSQL\\\\16\\\\data\" 2>&1)",
+      "Bash(mkdir -p \"C:/Users/honor/AppData/Local/Temp/claude/c--Users-honor-Downloads-globalexchange-erp/ef3c8b6e-68da-4b9e-8d5a-adc81709942d/scratchpad/pgsetup\")",
+      "Bash(npm init *)",
+      "Bash(npm install *)",
+      "Bash(python3 -c ' *)",
+      "Bash(tee \"C:/Users/honor/AppData/Local/Temp/claude/c--Users-honor-Downloads-globalexchange-erp/ef3c8b6e-68da-4b9e-8d5a-adc81709942d/scratchpad/pgsetup/pg_creds.txt\")",
+      "Bash(node setup.mjs)",
+      "Bash(node verify.mjs)",
+      "PowerShell($env:Path += \";C:\\\\Program Files\\\\PostgreSQL\\\\16\\\\bin\"; pg_ctl stop -D \"C:\\\\Program Files\\\\PostgreSQL\\\\16\\\\data\" -w 2>&1; Start-Sleep -Seconds 2; pg_ctl register -D \"C:\\\\Program Files\\\\PostgreSQL\\\\16\\\\data\" -N \"postgresql-x64-16\" 2>&1)",
+      "Bash(\"/c/Program Files/PostgreSQL/16/bin/pg_ctl.exe\" start -D \"C:/Program Files/PostgreSQL/16/data\" -l \"C:/Program Files/PostgreSQL/16/data/pg_startup.log\")",
+      "Bash(npm audit *)",
+      "Bash(node server.js)",
+      "Bash(curl -s http://localhost:3000/api/health)",
+      "Bash(curl -sI http://localhost:3000/index.html)",
+      "Bash(kill %1)",
+      "Bash(pkill -f \"node server.js\")",
+      "Bash(npm run *)",
+      "Bash(node -e ' *)",
+      "Bash(curl -s http://localhost:3000/api/auth/cashiers)",
+      "Bash(curl -s -X POST http://localhost:3000/api/auth/login -H \"Content-Type: application/json\" -d '{\"cashierId\":1,\"pin\":\"0000\"}')",
+      "Bash(curl -s -X POST http://localhost:3000/api/auth/login -H \"Content-Type: application/json\" -d '{\"cashierId\":1,\"pin\":\"1234\"}')",
+      "Read(//tmp/**)",
+      "Bash(netstat -ano)",
+      "Bash(powershell -Command \"Stop-Process -Id 31884 -Force\")",
+      "Bash(powershell -Command \"Stop-Process -Id 19524 -Force\")",
+      "Bash(curl -s http://localhost:3000/api/transactions -H 'Authorization: Bearer __CMDSUB_OUTPUT__')",
+      "Bash(curl -s -X POST http://localhost:3000/api/transactions -H 'Authorization: Bearer __CMDSUB_OUTPUT__' -H 'Content-Type: application/json' -d '{\"id\":\"GX-99001\",\"time\":\"14:32\",\"type\":\"Change \\(ACHAT USD\\)\",\"typeCode\":\"CHANGE\",\"client\":\"Ouédraogo Test\",\"amount\":\"604 000 FCFA\",\"fee\":\"500 FCFA\",\"status\":\"Terminé\"}')",
+      "Bash(curl -s -o /dev/null -w '%{http_code}\\\\n' -X POST http://localhost:3000/api/transactions -H 'Authorization: Bearer __CMDSUB_OUTPUT__' -H 'Content-Type: application/json' -d '{\"id\":\"GX-99001\",\"time\":\"14:32\",\"type\":\"x\",\"typeCode\":\"CHANGE\",\"client\":\"x\",\"amount\":\"1 FCFA\",\"fee\":\"1 FCFA\"}')",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3000/api/transactions)"
+    ]
+  }
+}
