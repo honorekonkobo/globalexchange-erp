@@ -101,6 +101,7 @@ async function processTransferOperation() {
 
     renderDashTable(State.transactions);
     renderHistoryTable(State.transactions);
+    refreshDashboard();
     updateTxCounter();
     transferFormDirty = false;
     showToast(

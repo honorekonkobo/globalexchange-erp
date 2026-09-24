@@ -101,6 +101,7 @@ async function submitVaultMovement() {
     document.getElementById('vault-movement-reason').value = '';
 
     refreshVault();
+    refreshDashboard();
     const successMsg = direction === 'IN' ? 'Alimentation de caisse enregistrée.' : 'Retrait de caisse enregistré.';
     const failureMsg = 'Échec de l\'enregistrement — vérifiez la connexion au serveur.';
     showToast(saved ? successMsg : failureMsg, saved ? 'success' : 'warning');

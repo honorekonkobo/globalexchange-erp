@@ -85,6 +85,11 @@ function performTabSwitch(tabId) {
     if (tabId === 'vault') {
         refreshVault();
     }
+
+    /* Rafraîchir les KPI et la répartition par service */
+    if (tabId === 'dashboard') {
+        refreshDashboard();
+    }
 }
 
 

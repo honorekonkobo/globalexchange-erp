@@ -142,6 +142,7 @@ async function refreshTransactionsFromServer() {
     await State.load();
     renderDashTable(State.transactions);
     renderHistoryTable(State.transactions);
+    refreshDashboard();
     updateTxCounter();
 }
 
@@ -216,6 +217,7 @@ async function loadAppData() {
     renderHistoryTable(State.transactions);
     renderKycTable(KycState.clients);
     refreshVault();
+    refreshDashboard();
     updateTxCounter();
     populateCurrencySelects();
     renderRatesDisplays();

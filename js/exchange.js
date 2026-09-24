@@ -92,6 +92,7 @@ async function processExchangeOperation() {
 
     renderDashTable(State.transactions);
     renderHistoryTable(State.transactions);
+    refreshDashboard();
     updateTxCounter();
     exchangeFormDirty = false;
     showToast(

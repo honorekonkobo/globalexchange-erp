@@ -213,28 +213,28 @@
                     <i data-lucide="banknote" class="w-4 h-4 text-emerald-400 shrink-0"></i>
                     <div>
                         <span class="text-gray-400 block text-[10px]">Caisse Cash :</span>
-                        <span class="font-bold text-emerald-400">4 250 000 FCFA</span>
+                        <span id="header-caisse-cash" class="font-bold text-emerald-400">—</span>
                     </div>
                 </div>
                 <div class="bg-gray-900/90 px-3 py-1.5 rounded-lg border border-gray-800 flex items-center gap-2 shrink-0 whitespace-nowrap">
                     <span class="w-3 h-3 rounded-full bg-om shrink-0"></span>
                     <div>
                         <span class="text-gray-400 block text-[10px]">UV Orange :</span>
-                        <span class="font-bold text-orange-400">1 850 000 FCFA</span>
+                        <span id="header-uv-om" class="font-bold text-orange-400">—</span>
                     </div>
                 </div>
                 <div class="bg-gray-900/90 px-3 py-1.5 rounded-lg border border-gray-800 flex items-center gap-2 shrink-0 whitespace-nowrap">
                     <span class="w-3 h-3 rounded-full bg-wave shrink-0"></span>
                     <div>
                         <span class="text-gray-400 block text-[10px]">UV Wave :</span>
-                        <span class="font-bold text-cyan-400">2 100 000 FCFA</span>
+                        <span id="header-uv-wave" class="font-bold text-cyan-400">—</span>
                     </div>
                 </div>
                 <div class="bg-gray-900/90 px-3 py-1.5 rounded-lg border border-gray-800 flex items-center gap-2 shrink-0 whitespace-nowrap">
                     <span class="w-3 h-3 rounded-full bg-wu shrink-0"></span>
                     <div>
                         <span class="text-gray-400 block text-[10px]">Solde WU :</span>
-                        <span class="font-bold text-yellow-400">9 450,00 USD</span>
+                        <span id="header-uv-wu" class="font-bold text-yellow-400">—</span>
                     </div>
                 </div>
             </div>
@@ -287,55 +287,51 @@
                         <div class="flex justify-between items-start">
                             <div>
                                 <p class="text-xs font-medium text-gray-400">Volume Total Jour</p>
-                                <h3 class="text-2xl font-black text-white mt-1">18 450 200 <span class="text-xs font-normal text-gray-400">FCFA</span></h3>
+                                <h3 class="text-2xl font-black text-white mt-1"><span id="dash-kpi-volume">0</span> <span class="text-xs font-normal text-gray-400">FCFA</span></h3>
                             </div>
                             <div class="p-3 bg-cyan-500/10 rounded-xl text-cyan-400 border border-cyan-500/20">
                                 <i data-lucide="bar-chart-3" class="w-5 h-5"></i>
                             </div>
                         </div>
-                        <div class="mt-4 flex items-center text-xs text-emerald-400 font-medium">
-                            <i data-lucide="arrow-up-right" class="w-4 h-4 mr-1"></i> +14.2% par rapport à hier
-                        </div>
+                        <div class="mt-4 text-xs text-gray-400 font-medium">Toutes opérations, aujourd'hui</div>
                     </div>
                     <div class="glass-card p-5 rounded-2xl">
                         <div class="flex justify-between items-start">
                             <div>
                                 <p class="text-xs font-medium text-gray-400">Commissions Nettes Jour</p>
-                                <h3 class="text-2xl font-black text-emerald-400 mt-1">342 850 <span class="text-xs font-normal text-gray-400">FCFA</span></h3>
+                                <h3 class="text-2xl font-black text-emerald-400 mt-1"><span id="dash-kpi-commissions">0</span> <span class="text-xs font-normal text-gray-400">FCFA</span></h3>
                             </div>
                             <div class="p-3 bg-emerald-500/10 rounded-xl text-emerald-400 border border-emerald-500/20">
                                 <i data-lucide="coins" class="w-5 h-5"></i>
                             </div>
                         </div>
-                        <div class="mt-4 flex items-center text-xs text-emerald-400 font-medium">
-                            <i data-lucide="arrow-up-right" class="w-4 h-4 mr-1"></i> +8.5% marge moyenne
-                        </div>
+                        <div class="mt-4 text-xs text-gray-400 font-medium">Frais perçus, aujourd'hui</div>
                     </div>
                     <div class="glass-card p-5 rounded-2xl">
                         <div class="flex justify-between items-start">
                             <div>
                                 <p class="text-xs font-medium text-gray-400">Transactions Reçues / Envoyées</p>
-                                <h3 class="text-2xl font-black text-white mt-1">128 <span class="text-xs font-normal text-gray-400">ops</span></h3>
+                                <h3 class="text-2xl font-black text-white mt-1"><span id="dash-kpi-txcount">0</span> <span class="text-xs font-normal text-gray-400">ops</span></h3>
                             </div>
                             <div class="p-3 bg-purple-500/10 rounded-xl text-purple-400 border border-purple-500/20">
                                 <i data-lucide="repeat" class="w-5 h-5"></i>
                             </div>
                         </div>
-                        <div class="mt-4 text-xs text-gray-400 font-medium">Dépôts : 74 &nbsp;|&nbsp; Retraits : 54</div>
+                        <div class="mt-4 text-xs text-gray-400 font-medium">
+                            Entrées : <span id="dash-kpi-entrees">0</span> &nbsp;|&nbsp; Sorties : <span id="dash-kpi-sorties">0</span>
+                        </div>
                     </div>
                     <div class="glass-card p-5 rounded-2xl">
                         <div class="flex justify-between items-start">
                             <div>
                                 <p class="text-xs font-medium text-gray-400">Disponible Coffre Fort</p>
-                                <h3 class="text-2xl font-black text-yellow-400 mt-1">15 800 000 <span class="text-xs font-normal text-gray-400">FCFA</span></h3>
+                                <h3 class="text-2xl font-black text-yellow-400 mt-1"><span id="dash-kpi-vault">0</span> <span class="text-xs font-normal text-gray-400">FCFA</span></h3>
                             </div>
                             <div class="p-3 bg-yellow-500/10 rounded-xl text-yellow-400 border border-yellow-500/20">
                                 <i data-lucide="vault" class="w-5 h-5"></i>
                             </div>
                         </div>
-                        <div class="mt-4 text-xs text-gray-400 font-medium">
-                            <span class="text-emerald-400">Sécurité 100%</span> — Contrôle effectué
-                        </div>
+                        <div class="mt-4 text-xs text-gray-400 font-medium">Solde de caisse en temps réel</div>
                     </div>
                 </div>
 
@@ -385,46 +381,9 @@
                                 <i data-lucide="pie-chart" class="w-4 h-4 text-cyan-400"></i>
                                 Répartition des Volumes par Service (Aujourd'hui)
                             </h3>
-                            <span class="text-xs text-gray-400">Total : 18.45M FCFA</span>
+                            <span id="dash-volume-total" class="text-xs text-gray-400">Total : 0 FCFA</span>
                         </div>
-                        <div class="space-y-4 pt-1">
-                            <div>
-                                <div class="flex justify-between text-xs font-semibold mb-1">
-                                    <span class="text-orange-400 flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-om"></span> Orange Money</span>
-                                    <span class="text-white">7 380 080 FCFA (40%)</span>
-                                </div>
-                                <div class="w-full bg-gray-800 h-3 rounded-full overflow-hidden">
-                                    <div class="bg-om h-full rounded-full" style="width:40%"></div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="flex justify-between text-xs font-semibold mb-1">
-                                    <span class="text-cyan-400 flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-cyan-400"></span> Change Devises (EUR/USD)</span>
-                                    <span class="text-white">5 535 060 FCFA (30%)</span>
-                                </div>
-                                <div class="w-full bg-gray-800 h-3 rounded-full overflow-hidden">
-                                    <div class="bg-cyan-400 h-full rounded-full" style="width:30%"></div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="flex justify-between text-xs font-semibold mb-1">
-                                    <span class="text-yellow-400 flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-wu"></span> Western Union</span>
-                                    <span class="text-white">2 767 530 FCFA (15%)</span>
-                                </div>
-                                <div class="w-full bg-gray-800 h-3 rounded-full overflow-hidden">
-                                    <div class="bg-wu h-full rounded-full" style="width:15%"></div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="flex justify-between text-xs font-semibold mb-1">
-                                    <span class="text-blue-400 flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-moov"></span> Moov Money & Wave</span>
-                                    <span class="text-white">2 767 530 FCFA (15%)</span>
-                                </div>
-                                <div class="w-full bg-gray-800 h-3 rounded-full overflow-hidden">
-                                    <div class="bg-moov h-full rounded-full" style="width:15%"></div>
-                                </div>
-                            </div>
-                        </div>
+                        <div id="dash-volume-breakdown" class="space-y-4 pt-1"></div>
                     </div>
                 </div>
 

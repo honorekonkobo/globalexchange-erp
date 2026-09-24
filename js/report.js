@@ -105,3 +105,65 @@ function refreshReport() {
 function printReport() {
     window.print();
 }
+
+
+/* ══════════════════════════════════════════════════════════════
+   TABLEAU DE BORD — KPI et répartition par service (onglet Dashboard)
+   Réutilise REPORT_OPERATORS et le calcul du solde de caisse
+   (computeVaultLedger, vault.js) pour ne pas dupliquer la logique
+   déjà validée dans l'onglet Rapport.
+══════════════════════════════════════════════════════════════ */
+function refreshDashboard() {
+    let volumeTotal = 0, commissionsTotal = 0, entrees = 0, sorties = 0;
+    State.transactions.forEach(t => {
+        volumeTotal += parseFCFA(t.amount);
+        commissionsTotal += parseFCFA(t.fee);
+        isVaultEntree(t) ? entrees++ : sorties++;
+    });
+
+    document.getElementById('dash-kpi-volume').textContent      = volumeTotal.toLocaleString('fr-FR');
+    document.getElementById('dash-kpi-commissions').textContent = commissionsTotal.toLocaleString('fr-FR');
+    document.getElementById('dash-kpi-txcount').textContent     = State.transactions.length;
+    document.getElementById('dash-kpi-entrees').textContent     = entrees;
+    document.getElementById('dash-kpi-sorties').textContent     = sorties;
+
+    const { currentBalance } = computeVaultLedger();
+    document.getElementById('dash-kpi-vault').textContent = currentBalance.toLocaleString('fr-FR');
+
+    const byOperator = REPORT_OPERATORS
+        .map(op => ({
+            ...op,
+            volume: State.transactions
+                .filter(t => t.typeCode === op.code)
+                .reduce((sum, t) => sum + parseFCFA(t.amount), 0),
+        }))
+        .filter(op => op.volume > 0);
+
+    document.getElementById('dash-volume-total').textContent = 'Total : ' + volumeTotal.toLocaleString('fr-FR') + ' FCFA';
+
+    const container = document.getElementById('dash-volume-breakdown');
+    container.innerHTML = byOperator.length
+        ? byOperator.map(op => {
+            const pct = volumeTotal ? (op.volume / volumeTotal * 100) : 0;
+            return `
+                <div>
+                    <div class="flex justify-between text-xs font-semibold mb-1">
+                        <span class="text-gray-300 flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full ${op.barClass}"></span> ${op.label}</span>
+                        <span class="text-white">${op.volume.toLocaleString('fr-FR')} FCFA (${pct.toFixed(0)}%)</span>
+                    </div>
+                    <div class="w-full bg-gray-800 h-3 rounded-full overflow-hidden">
+                        <div class="${op.barClass} h-full rounded-full" style="width:${pct.toFixed(1)}%"></div>
+                    </div>
+                </div>
+            `;
+        }).join('')
+        : '<p class="text-xs text-gray-500 text-center py-4">Aucune opération aujourd\'hui.</p>';
+
+    /* Soldes rapides du header : Caisse Cash = solde de caisse réel,
+       flottants opérateurs = CONFIG.providerFloats (pas encore suivis
+       côté serveur — seule source de vérité disponible aujourd'hui). */
+    document.getElementById('header-caisse-cash').textContent = currentBalance.toLocaleString('fr-FR') + ' FCFA';
+    document.getElementById('header-uv-om').textContent   = CONFIG.providerFloats.OM   ?? '—';
+    document.getElementById('header-uv-wave').textContent = CONFIG.providerFloats.WAVE ?? '—';
+    document.getElementById('header-uv-wu').textContent   = CONFIG.providerFloats.WU   ?? '—';
+}
