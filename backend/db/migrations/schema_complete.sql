@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS agencies (
     city        VARCHAR(100),
     country     VARCHAR(100) DEFAULT 'Burkina Faso',
     phone       VARCHAR(30),
-    email       VARCHAR(150) NOT NULL UNIQUE,
+    email       VARCHAR(150) UNIQUE,            -- optionnel : aucune fonctionnalité n'envoie d'email aujourd'hui
     plan        VARCHAR(20)  DEFAULT 'starter', -- starter | pro | enterprise
     active      BOOLEAN      DEFAULT TRUE,
     created_at  TIMESTAMPTZ  DEFAULT NOW()

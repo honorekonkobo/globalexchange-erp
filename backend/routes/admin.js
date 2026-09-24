@@ -43,8 +43,8 @@ const SLUG_RE = /^[a-z0-9]([a-z0-9-]{1,48}[a-z0-9])?$/;
 router.post('/agencies', asyncHandler(async (req, res) => {
     const { name, slug, city, phone, email, plan, cashier } = req.body ?? {};
 
-    if (!name || !slug || !email) {
-        return res.status(400).json({ error: 'Nom, code agence (slug) et email sont requis.' });
+    if (!name || !slug) {
+        return res.status(400).json({ error: 'Nom et code agence (slug) sont requis.' });
     }
     if (!SLUG_RE.test(slug)) {
         return res.status(400).json({ error: 'Code agence invalide (minuscules, chiffres, tirets, 3 à 50 caractères).' });
@@ -63,7 +63,7 @@ router.post('/agencies', asyncHandler(async (req, res) => {
                 `INSERT INTO agencies (name, slug, city, country, phone, email, plan)
                  VALUES ($1,$2,$3,'Burkina Faso',$4,$5,$6)
                  RETURNING *`,
-                [name, slug, city ?? null, phone ?? null, email, plan ?? 'starter']
+                [name, slug, city ?? null, phone ?? null, email ?? null, plan ?? 'starter']
             ));
         } catch (e) {
             if (e.code === '23505') {
