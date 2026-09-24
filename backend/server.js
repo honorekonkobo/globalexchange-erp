@@ -11,6 +11,7 @@ import ratesRouter from './routes/rates.js';
 import configRouter from './routes/config.js';
 import adminRouter from './routes/admin.js';
 import { authRateLimit, adminRateLimit, businessRateLimit } from './middleware/rateLimit.js';
+import { securityHeaders } from './middleware/security.js';
 
 /* ── Vérification des variables d'environnement requises ─────
    Échec rapide et explicite au démarrage plutôt qu'une erreur
@@ -32,6 +33,7 @@ const app = express();
 /* Pas de middleware CORS : le frontend est servi par ce même serveur
    (même origine http://localhost:3000), aucun appel cross-origin n'est
    nécessaire — autant ne pas ouvrir cette surface. */
+app.use(securityHeaders);
 app.use(express.json({ limit: '5mb' })); // limite relevée pour les photos KYC en base64
 
 /* ── Vérification de l'état du serveur + de la connexion DB ─── */
