@@ -10,6 +10,7 @@ import vaultRouter from './routes/vault.js';
 import ratesRouter from './routes/rates.js';
 import configRouter from './routes/config.js';
 import adminRouter from './routes/admin.js';
+import { authRateLimit, adminRateLimit, businessRateLimit } from './middleware/rateLimit.js';
 
 /* ── Vérification des variables d'environnement requises ─────
    Échec rapide et explicite au démarrage plutôt qu'une erreur
@@ -46,13 +47,13 @@ app.get('/api/health', async (req, res) => {
     }
 });
 
-app.use('/api/auth', authRouter);
-app.use('/api/transactions', transactionsRouter);
-app.use('/api/kyc-clients', kycRouter);
-app.use('/api/vault', vaultRouter);
-app.use('/api/rates', ratesRouter);
-app.use('/api/config', configRouter);
-app.use('/api/admin', adminRouter);
+app.use('/api/auth', authRateLimit, authRouter);
+app.use('/api/transactions', businessRateLimit, transactionsRouter);
+app.use('/api/kyc-clients', businessRateLimit, kycRouter);
+app.use('/api/vault', businessRateLimit, vaultRouter);
+app.use('/api/rates', businessRateLimit, ratesRouter);
+app.use('/api/config', businessRateLimit, configRouter);
+app.use('/api/admin', adminRateLimit, adminRouter);
 
 /* ── Fichiers statiques du frontend existant ────────────────── */
 app.use(express.static(FRONTEND_DIR));

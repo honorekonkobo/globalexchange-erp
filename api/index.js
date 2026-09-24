@@ -15,8 +15,12 @@ import vaultRouter from '../backend/routes/vault.js';
 import ratesRouter from '../backend/routes/rates.js';
 import configRouter from '../backend/routes/config.js';
 import adminRouter from '../backend/routes/admin.js';
+import { authRateLimit, adminRateLimit, businessRateLimit } from '../backend/middleware/rateLimit.js';
 
 const app = express();
+/* Vercel est un proxy devant la fonction : sans ceci, express-rate-limit verrait
+   l'IP du proxy pour toutes les requêtes et partagerait un seul quota global. */
+app.set('trust proxy', 1);
 app.use(express.json({ limit: '5mb' }));
 
 /* ── Health check ─── */
@@ -30,13 +34,13 @@ app.get('/api/health', async (req, res) => {
     }
 });
 
-app.use('/api/auth',         authRouter);
-app.use('/api/transactions', transactionsRouter);
-app.use('/api/kyc-clients',  kycRouter);
-app.use('/api/vault',        vaultRouter);
-app.use('/api/rates',        ratesRouter);
-app.use('/api/config',       configRouter);
-app.use('/api/admin',        adminRouter);
+app.use('/api/auth',         authRateLimit, authRouter);
+app.use('/api/transactions', businessRateLimit, transactionsRouter);
+app.use('/api/kyc-clients',  businessRateLimit, kycRouter);
+app.use('/api/vault',        businessRateLimit, vaultRouter);
+app.use('/api/rates',        businessRateLimit, ratesRouter);
+app.use('/api/config',       businessRateLimit, configRouter);
+app.use('/api/admin',        adminRateLimit, adminRouter);
 
 /* ── Gestionnaire d'erreurs global ── */
 app.use((err, req, res, next) => {

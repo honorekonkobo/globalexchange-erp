@@ -9,6 +9,10 @@
 
 const AGENCY_SLUG_STORAGE_KEY = 'globalex_agency_slug';
 
+/** Identifiant du timer de rafraîchissement — nécessaire pour l'arrêter à la déconnexion
+ *  (sinon une reconnexion sans rechargement de page accumulerait plusieurs timers). */
+let refreshIntervalId = null;
+
 /** Peuple le menu déroulant des guichetiers pour l'agence donnée (route publique, pas de token requis) */
 async function populateCashierSelect(agencySlug) {
     const select = document.getElementById('auth-cashier');
@@ -109,7 +113,27 @@ async function attemptLogin() {
     showToast(`Session ouverte — Bienvenue, ${result.cashier.name} !`, 'success');
 
     /* Rafraîchissement périodique des transactions (visibilité multi-guichets) */
-    setInterval(refreshTransactionsFromServer, 20000);
+    clearInterval(refreshIntervalId);
+    refreshIntervalId = setInterval(refreshTransactionsFromServer, 20000);
+}
+
+/** Déconnexion : coupe le rafraîchissement, invalide le token local et rouvre l'écran de connexion */
+function logoutCashier() {
+    openConfirmModal('Voulez-vous vraiment fermer votre session ?', async () => {
+        clearInterval(refreshIntervalId);
+        refreshIntervalId = null;
+
+        try { await apiPost('/auth/logout', {}); } catch { /* best-effort : le token local est de toute façon invalidé ci-dessous */ }
+
+        setAuthToken(null);
+        CONFIG.cashier.name = '';
+        CONFIG.cashier.counter = '';
+
+        document.getElementById('auth-pin').value = '';
+        document.getElementById('auth-overlay').classList.remove('hidden');
+        document.getElementById('auth-pin').focus();
+        showToast('Session fermée.', 'success');
+    });
 }
 
 /** Recharge les transactions depuis l'API et met à jour les vues déjà affichées
